@@ -11,14 +11,14 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Route principale
+// Page d’accueil simple
 app.get("/", (req, res) => {
-  res.send("Bienvenue sur l'API ToDoList 🚀 — utilisez /tasks pour accéder aux tâches.");
+  res.send("Bienvenue sur l'API ToDoList 🚀 — utilisez /tasks pour gérer les tâches !");
 });
 
-// Routes API
+// Routes de l'API
 app.use("/tasks", taskRoutes);
 
 app.listen(PORT, () => {
-  console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
+  console.log(`✅ Serveur lancé sur http://localhost:${PORT}`);
 });

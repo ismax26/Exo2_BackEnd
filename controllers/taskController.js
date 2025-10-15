@@ -6,7 +6,9 @@ export const getTasks = (req, res) => {
 
 export const createTask = (req, res) => {
   const { title } = req.body;
-  if (!title) return res.status(400).json({ message: "Le titre est requis" });
+  if (!title) {
+    return res.status(400).json({ message: "Le titre est requis" });
+  }
   const newTask = addTask(title);
   res.status(201).json(newTask);
 };
