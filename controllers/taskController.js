@@ -1,20 +1,21 @@
-let tasks = [];
+import { getAllTasks, addTask, deleteTask } from "../models/taskModel.js";
 
-exports.getAllTasks = (req, res) => {
-  res.json(tasks);
+export const getTasks = (req, res) => {
+  res.json(getAllTasks());
 };
 
-exports.addTask = (req, res) => {
+export const createTask = (req, res) => {
   const { title } = req.body;
-  if (!title) return res.status(400).json({ message: "Titre requis" });
-
-  const newTask = { id: Date.now(), title };
-  tasks.push(newTask);
+  if (!title) return res.status(400).json({ message: "Le titre est requis" });
+  const newTask = addTask(title);
   res.status(201).json(newTask);
 };
 
-exports.deleteTask = (req, res) => {
-  const { id } = req.params;
-  tasks = tasks.filter((task) => task.id != id);
-  res.json({ message: "Tâche supprimée" });
+export const removeTask = (req, res) => {
+  const id = parseInt(req.params.id);
+  if (deleteTask(id)) {
+    res.json({ message: "Tâche supprimée" });
+  } else {
+    res.status(404).json({ message: "Tâche introuvable" });
+  }
 };

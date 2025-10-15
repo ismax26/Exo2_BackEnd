@@ -1,26 +1,18 @@
-class TaskModel {
-  constructor() {
-    this.tasks = [];
-  }
+let tasks = [];
 
-  addTask(title) {
-    const newTask = { id: this.tasks.length, title };
-    this.tasks.push(newTask);
-    return newTask;
-  }
+export const getAllTasks = () => tasks;
 
-  getAllTasks() {
-    return this.tasks;
-  }
+export const addTask = (title) => {
+  const newTask = { id: Date.now(), title };
+  tasks.push(newTask);
+  return newTask;
+};
 
-  deleteTask(id) {
-    const index = this.tasks.findIndex(t => t.id === parseInt(id));
-    if (index !== -1) {
-      this.tasks.splice(index, 1);
-      return true;
-    }
-    return false;
+export const deleteTask = (id) => {
+  const index = tasks.findIndex(task => task.id === id);
+  if (index !== -1) {
+    tasks.splice(index, 1);
+    return true;
   }
-}
-
-module.exports = new TaskModel();
+  return false;
+};

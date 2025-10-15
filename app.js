@@ -1,20 +1,18 @@
-const express = require("express");
-const app = express();
-const PORT = 3000;
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import taskRoutes from "./routes/taskRoutes.js";
 
-// Middleware pour lire les JSON
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(cors());
 app.use(express.json());
 
-// ✅ Route de test
-app.get("/", (req, res) => {
-  res.send("Bienvenue sur l'API TodoList 🚀");
-});
-
-// Exemple de routes pour les tâches (si tu fais une TodoList)
-const taskRoutes = require("./routes/taskRoutes");
 app.use("/tasks", taskRoutes);
 
-// Lancement du serveur
 app.listen(PORT, () => {
-  console.log(`✅ Serveur démarré sur http://localhost:${PORT}`);
+  console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
 });
