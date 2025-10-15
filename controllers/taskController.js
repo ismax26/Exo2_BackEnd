@@ -1,22 +1,20 @@
-const TaskModel = require('../models/taskModel');
+let tasks = [];
+
+exports.getAllTasks = (req, res) => {
+  res.json(tasks);
+};
 
 exports.addTask = (req, res) => {
   const { title } = req.body;
   if (!title) return res.status(400).json({ message: "Titre requis" });
 
-  const task = TaskModel.addTask(title);
-  res.status(201).json(task);
-};
-
-exports.getTasks = (req, res) => {
-  const tasks = TaskModel.getAllTasks();
-  res.json(tasks);
+  const newTask = { id: Date.now(), title };
+  tasks.push(newTask);
+  res.status(201).json(newTask);
 };
 
 exports.deleteTask = (req, res) => {
   const { id } = req.params;
-  const success = TaskModel.deleteTask(id);
-
-  if (success) res.json({ message: "Tâche supprimée" });
-  else res.status(404).json({ message: "Tâche introuvable" });
+  tasks = tasks.filter((task) => task.id != id);
+  res.json({ message: "Tâche supprimée" });
 };
