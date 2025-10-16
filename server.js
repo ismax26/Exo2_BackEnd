@@ -1,24 +1,16 @@
 import express from "express";
-import cors from "cors";
 import dotenv from "dotenv";
-import taskRoutes from "./src/routes/mesRoutes.js";
+import cors from "cors";
+import taskRoutes from "./src/routes/taskRoutes.js";
 
 dotenv.config();
-
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 
-// Page d’accueil simple
-app.get("/", (req, res) => {
-  res.send("Bienvenue sur l'API ToDoList 🚀 — utilisez /tasks pour gérer les tâches !");
-});
+// Routes
+app.use("/api/tasks", taskRoutes);
 
-// Routes de l'API
-app.use("/tasks", taskRoutes);
-
-app.listen(PORT, () => {
-  console.log(`✅ Serveur lancé sur http://localhost:${PORT}`);
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));

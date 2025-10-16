@@ -1,10 +1,10 @@
 import express from "express";
-import { getTasks, createTask, removeTask } from "../controllers/taskController.js";
+import { getTasks, addTask, removeTask } from "../controllers/monController.js";
 
 const router = express.Router();
 
-router.get("/", getTasks);        // Afficher toutes les tâches
-router.post("/", createTask);     // Ajouter une tâche
-router.delete("/:id", removeTask); // Supprimer une tâche
+router.get("/", getTasks);
+router.post("/", addTask);
+router.delete("/:id", removeTask);
 
 export default router;
