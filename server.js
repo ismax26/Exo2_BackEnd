@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import mesRoutes from "./src/routes/mesRoutes.js"; // ✅ Ajout de l'import correct
+import mesRoutes from "./src/routes/mesRoutes.js"; // ✅ bon import ES Module
 
 dotenv.config();
 
@@ -11,10 +11,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes
-app.use("/api/tasks", mesRoutes); // ✅ maintenant mesRoutes est défini
+// Routes principales
+app.use("/api/tasks", mesRoutes);
 
-// Lancement du serveur
+// Démarrage serveur
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ Serveur lancé sur le port ${PORT}`);
